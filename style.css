@@ -1,0 +1,346 @@
+:root {
+    --primary: #4e54c8;
+    --secondary: #8f94fb;
+    --accent: #ff007a;
+    --success: #00c853;
+    --error: #ff3d00;
+    --text: #ffffff;
+    --glass-bg: rgba(255, 255, 255, 0.1);
+    --glass-border: rgba(255, 255, 255, 0.2);
+    --font-heading: 'Outfit', sans-serif;
+    --font-body: 'Fredoka', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-body);
+    color: var(--text);
+    background-color: #1a1a2e;
+    background-image: url('assets/background.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    overflow: hidden;
+    user-select: none;
+}
+
+/* Overlay to darken background for better readability */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(3px);
+    z-index: -1;
+}
+
+.app-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+/* Universal Screen Styles */
+.screen {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0.95);
+}
+
+.screen.active {
+    opacity: 1;
+    pointer-events: auto;
+    transform: scale(1);
+}
+
+.hidden {
+    display: none;
+    /* Helpful for accessibility, though opacity handles visual */
+}
+
+/* Glass Panel Utility */
+.glass-panel {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    max-width: 90%;
+    width: 400px;
+}
+
+/* Typography */
+h1.title {
+    font-family: var(--font-heading);
+    font-size: 3.5rem;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.highlight {
+    color: var(--accent);
+    /* Fallback */
+    background: linear-gradient(45deg, #ff007a, #ffd700);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    margin-bottom: 2rem;
+}
+
+/* Buttons */
+button {
+    cursor: pointer;
+    font-family: var(--font-heading);
+    border: none;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+.btn-primary {
+    background: linear-gradient(45deg, var(--primary), var(--secondary));
+    color: white;
+    font-size: 1.5rem;
+    padding: 1rem 3rem;
+    border-radius: 50px;
+    font-weight: 700;
+    box-shadow: 0 4px 15px rgba(78, 84, 200, 0.5);
+    letter-spacing: 1px;
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 25px rgba(78, 84, 200, 0.7);
+}
+
+.btn-primary:active {
+    transform: translateY(1px);
+}
+
+.btn-secondary {
+    background: var(--success);
+    color: white;
+    font-size: 1.2rem;
+    padding: 0.8rem 2rem;
+    border-radius: 12px;
+    font-weight: 600;
+    margin: 0.5rem;
+}
+
+.btn-secondary:hover {
+    filter: brightness(1.1);
+    transform: translateY(-2px);
+}
+
+.btn-text {
+    background: transparent;
+    color: white;
+    font-size: 1rem;
+    text-decoration: underline;
+    opacity: 0.8;
+}
+
+.btn-text:hover {
+    opacity: 1;
+}
+
+/* Quiz Screen Specifics */
+.top-bar {
+    position: absolute;
+    top: 20px;
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 600px;
+}
+
+.score-box {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.quiz-card {
+    width: 500px;
+    /* Slightly wider */
+}
+
+.timer-bar {
+    width: 100%;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+    margin-bottom: 2rem;
+    overflow: hidden;
+}
+
+#timer-fill {
+    height: 100%;
+    background: var(--accent);
+    width: 100%;
+    transition: width 1s linear;
+}
+
+.question-text {
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    margin-bottom: 2rem;
+    font-weight: 600;
+}
+
+.options-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.option-btn {
+    background: rgba(255, 255, 255, 0.15);
+    border: 2px solid transparent;
+    padding: 1.5rem;
+    border-radius: 15px;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    transition: all 0.2s;
+}
+
+.option-btn:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: scale(1.02);
+}
+
+.option-btn.correct {
+    background: var(--success) !important;
+    border-color: #69f0ae;
+    box-shadow: 0 0 15px var(--success);
+}
+
+.option-btn.wrong {
+    background: var(--error) !important;
+    border-color: #ff5252;
+    opacity: 0.7;
+}
+
+.feedback-text {
+    margin-top: 1.5rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    min-height: 1.5rem;
+}
+
+/* Result Screen */
+.final-score {
+    margin: 2rem 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.fs-label {
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    opacity: 0.7;
+}
+
+#final-score-display {
+    font-size: 5rem;
+    font-weight: 800;
+    line-height: 1;
+    color: #ffd700;
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+}
+
+.perf-msg {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    color: #a7ffeb;
+}
+
+.final-badges-grid {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.badge {
+    font-size: 2rem;
+    animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes popIn {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+#confetti-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 999;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .title {
+        font-size: 2.5rem;
+    }
+
+    .question-text {
+        font-size: 2rem;
+    }
+
+    .glass-panel {
+        padding: 1.5rem;
+        width: 95%;
+    }
+
+    .options-grid {
+        grid-template-columns: 1fr;
+    }
+}

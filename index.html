@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Quiz Challenge</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Fredoka:wght@400;600&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="app-container">
+
+        <!-- DASHBOARD SCREEN -->
+        <section id="dashboard" class="screen active">
+            <div class="glass-panel">
+                <h1 class="title">Math Quiz <br> <span class="highlight">Challenge</span></h1>
+                <p class="subtitle">Test your skills & earn rewards!</p>
+                <button id="start-btn" class="btn-primary">Start Quiz 🚀</button>
+            </div>
+        </section>
+
+        <!-- QUIZ SCREEN -->
+        <section id="quiz" class="screen hidden">
+            <div class="top-bar">
+                <div class="score-box">⭐ <span id="score">0</span></div>
+                <div class="badges-box" id="badges-container"></div>
+            </div>
+
+            <div class="quiz-card glass-panel">
+                <div class="timer-bar">
+                    <div id="timer-fill"></div>
+                </div>
+                <h2 id="question" class="question-text">Loading...</h2>
+                <div class="options-grid" id="options-container">
+                    <!-- Options injected here -->
+                </div>
+                <p id="feedback" class="feedback-text hidden"></p>
+            </div>
+        </section>
+
+        <!-- RESULT SCREEN -->
+        <section id="result" class="screen hidden">
+            <div class="glass-panel result-panel">
+                <h2>Quiz Completed! 🎉</h2>
+                <div class="final-score">
+                    <span class="fs-label">Total Score</span>
+                    <span id="final-score-display">0</span>
+                </div>
+                <div id="performance-msg" class="perf-msg">Good Job!</div>
+                <div id="final-badges" class="final-badges-grid"></div>
+
+                <div class="action-buttons">
+                    <button id="restart-btn" class="btn-secondary">Play Again 🔄</button>
+                    <button id="home-btn" class="btn-text">Home 🏠</button>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Canvas for Confetti -->
+    <canvas id="confetti-canvas"></canvas>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
